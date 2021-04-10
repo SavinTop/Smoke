@@ -8,6 +8,24 @@ const date_time_mouse_picker_danger_header = document.getElementById("mouse_time
 const date_time_mouse_picker_events = document.getElementById("mouse_time_pick_events");
 const timeline_whole_day_width = timeline_whole_day_canvas.clientWidth;
 let timetable = JSON.parse(timetable_json);
+var notyf = new Notyf({types: [
+    {
+      type: 'warning',
+      background: 'orange',
+      icon: {
+        className: 'material-icons',
+        tagName: 'i',
+        text: 'warning'
+      }
+    },
+    {
+      type: 'error',
+      background: 'indianred',
+      duration: 4000,
+      dismissible: true
+    }
+  ]});
+
 
 const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
@@ -137,7 +155,7 @@ const date_time_loop = setInterval(()=>{
         {
             tracking = false;
             tracking_toggle.checked = false;
-            alert("Tracking works only from 8 am to 8 pm");
+            notyf.error("Tracking works only from 8 am to 8 pm");
             return;
         }
         output_info(time);
