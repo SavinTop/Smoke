@@ -1,0 +1,626 @@
+timetable_json = `[
+    {
+      "day": -1,
+      "from": "9:15",
+      "to": "9:30",
+      "time_tolerance": 1,
+      "danger_coof": 0.2,
+      "description": "School break"
+    },
+    {
+      "day": -1,
+      "from": "10:15",
+      "to": "10:25",
+      "time_tolerance": 1,
+      "danger_coof": 0.2,
+      "description": "School break"
+    },
+    {
+      "day": -1,
+      "from": "11:10",
+      "to": "11:25",
+      "time_tolerance": 1,
+      "danger_coof": 0.2,
+      "description": "School break"
+    },
+    {
+      "day": -1,
+      "from": "12:10",
+      "to": "12:25",
+      "time_tolerance": 1,
+      "danger_coof": 0.2,
+      "description": "School break"
+    },
+    {
+      "day": -1,
+      "from": "13:10",
+      "to": "13:25",
+      "time_tolerance": 1,
+      "danger_coof": 0.2,
+      "description": "School break"
+    },
+    {
+      "day": -1,
+      "from": "14:10",
+      "to": "14:20",
+      "time_tolerance": 1,
+      "danger_coof": 0.2,
+      "description": "School break"
+    },
+    {
+      "day": -1,
+      "from": "15:05",
+      "to": "15:20",
+      "time_tolerance": 1,
+      "danger_coof": 0.2,
+      "description": "School break"
+    },
+    {
+      "day": -1,
+      "from": "16:05",
+      "to": "16:20",
+      "time_tolerance": 1,
+      "danger_coof": 0.2,
+      "description": "School break"
+    },
+    {
+      "day": -1,
+      "from": "17:05",
+      "to": "17:20",
+      "time_tolerance": 1,
+      "danger_coof": 0.2,
+      "description": "School break"
+    },
+    {
+      "day": -1,
+      "from": "18:05",
+      "to": "18:15",
+      "time_tolerance": 0,
+      "danger_coof": 0.2,
+      "description": "School break"
+    },
+    {
+      "day": 0,
+      "from": "8:00",
+      "to": "8:30",
+      "time_tolerance": 5,
+      "danger_coof": 1,
+      "description": "Going to the lesson in 5A, 28 or 29 c."
+    },
+    {
+      "day": 0,
+      "from": "8:30",
+      "to": "9:15",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 5A, 28 or 29 c."
+    },
+    {
+      "day": 0,
+      "from": "9:15",
+      "to": "9:30",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 0,
+      "from": "9:30",
+      "to": "10:15",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 9V, 3 or 25 c."
+    },
+    {
+      "day": 0,
+      "from": "10:15",
+      "to": "10:25",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 0,
+      "from": "10:25",
+      "to": "11:10",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 5V, 3 or 28 c."
+    },
+    {
+      "day": 0,
+      "from": "11:10",
+      "to": "12:20",
+      "time_tolerance": 10,
+      "danger_coof": 0.5,
+      "description": "Undefined, her free time"
+    },
+    {
+      "day": 0,
+      "from": "12:20",
+      "to": "13:20",
+      "time_tolerance": 20,
+      "danger_coof": -1,
+      "description": "Child support:d"
+    },
+    {
+      "day": 0,
+      "from": "13:20",
+      "to": "13:40",
+      "time_tolerance": 10,
+      "danger_coof": 1,
+      "description": "Going home"
+    },
+    {
+      "day": 0,
+      "from": "15:00",
+      "to": "15:20",
+      "time_tolerance": 5,
+      "danger_coof": 1,
+      "description": "Going back"
+    },
+    {
+      "day": 0,
+      "from": "15:20",
+      "to": "16:05",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 4V, 9 c."
+    },
+    {
+      "day": 0,
+      "from": "16:05",
+      "to": "16:15",
+      "time_tolerance": 10,
+      "danger_coof": 1,
+      "description": "Going home"
+    },
+    {
+      "day": 1,
+      "from": "9:00",
+      "to": "9:30",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Going to the lesson in 9V, 25, 36 c."
+    },
+    {
+      "day": 1,
+      "from": "9:30",
+      "to": "10:15",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 9V, 25 or 36 c."
+    },
+    {
+      "day": 1,
+      "from": "10:15",
+      "to": "10:25",
+      "time_tolerance": 10,
+      "danger_coof": 1,
+      "description": "Going home"
+    },
+    {
+      "day": 1,
+      "from": "12:05",
+      "to": "12:25",
+      "time_tolerance": 5,
+      "danger_coof": 1,
+      "description": "Going back"
+    },
+    {
+      "day": 1,
+      "from": "12:25",
+      "to": "13:10",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 5B, 28 of 29 c."
+    },
+    {
+      "day": 1,
+      "from": "13:10",
+      "to": "13:25",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 1,
+      "from": "13:25",
+      "to": "14:10",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 8B, 27 or 29 c."
+    },
+    {
+      "day": 1,
+      "from": "14:10",
+      "to": "14:20",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 1,
+      "from": "14:20",
+      "to": "15:05",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 4A, 9 c."
+    },
+    {
+      "day": 1,
+      "from": "15:05",
+      "to": "15:20",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 1,
+      "from": "15:20",
+      "to": "16:05",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 4V, 9c."
+    },
+    {
+      "day": 1,
+      "from": "16:05",
+      "to": "16:20",
+      "time_tolerance": 1,
+      "danger_coof": 1,
+      "description": "Going home"
+    },
+    {
+      "day": 2,
+      "from": "8:00",
+      "to": "8:30",
+      "time_tolerance": 5,
+      "danger_coof": 1,
+      "description": "Going to the lesson in 5V, 28 or 29 c."
+    },
+    {
+      "day": 2,
+      "from": "8:30",
+      "to": "9:15",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 5V, 28 or 29 c."
+    },
+    {
+      "day": 2,
+      "from": "9:15",
+      "to": "10:10",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 2,
+      "from": "9:15",
+      "to": "10:10",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Dining room"
+    },
+    {
+      "day": 2,
+      "from": "10:25",
+      "to": "11:10",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 8V, 27 or 28 c."
+    },
+    {
+      "day": 2,
+      "from": "11:10",
+      "to": "11:25",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 2,
+      "from": "11:25",
+      "to": "12:10",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 8B, 28, 29 c."
+    },
+    {
+      "day": 2,
+      "from": "12:10",
+      "to": "12:25",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 2,
+      "from": "12:25",
+      "to": "13:10",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 5A, 27 or 29 c."
+    },
+    {
+      "day": 2,
+      "from": "13:10",
+      "to": "14:20",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 2,
+      "from": "14:20",
+      "to": "15:05",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 4A, 9 c."
+    },
+    {
+      "day": 2,
+      "from": "15:05",
+      "to": "15:20",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 2,
+      "from": "15:20",
+      "to": "16:05",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 3B, 9 c."
+    },
+    {
+      "day": 2,
+      "from": "16:05",
+      "to": "16:20",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 2,
+      "from": "16:20",
+      "to": "17:05",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 4V, 9 c."
+    },
+    {
+      "day": 2,
+      "from": "17:05",
+      "to": "17:30",
+      "time_tolerance": 10,
+      "danger_coof": 1,
+      "description": "Going home"
+    },
+    {
+      "day": 3,
+      "from": "8:00",
+      "to": "8:30",
+      "time_tolerance": 5,
+      "danger_coof": 1,
+      "description": "Going to lesson in 8V, 28 or 29 c."
+    },
+    {
+      "day": 3,
+      "from": "8:30",
+      "to": "9:15",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 8V, 28 or 29 c."
+    },
+    {
+      "day": 3,
+      "from": "9:15",
+      "to": "9:30",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 3,
+      "from": "9:30",
+      "to": "10:15",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 9V, 25, 27 c."
+    },
+    {
+      "day": 3,
+      "from": "10:15",
+      "to": "10:25",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 3,
+      "from": "10:25",
+      "to": "11:10",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 5A, 27, 35 c."
+    },
+    {
+      "day": 3,
+      "from": "11:10",
+      "to": "11:25",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 3,
+      "from": "11:25",
+      "to": "12:10",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 5V, 27, 38 c."
+    },
+    {
+      "day": 3,
+      "from": "12:10",
+      "to": "12:25",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 3,
+      "from": "12:25",
+      "to": "13:10",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 5B, 28, 29 c."
+    },
+    {
+      "day": 3,
+      "from": "13:10",
+      "to": "13:20",
+      "time_tolerance": 10,
+      "danger_coof": 1,
+      "description": "Going home"
+    },
+    {
+      "day": 3,
+      "from": "15:00",
+      "to": "15:20",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Going back"
+    },
+    {
+      "day": 3,
+      "from": "15:20",
+      "to": "16:05",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 3B, 9 c."
+    },
+    {
+      "day": 3,
+      "from": "16:05",
+      "to": "16:20",
+      "time_tolerance": 10,
+      "danger_coof": 1,
+      "description": "Going home"
+    },
+    {
+      "day": 3,
+      "from": "19:00",
+      "to": "19:10",
+      "time_tolerance": 10,
+      "danger_coof": 1,
+      "description": "Child help transfer"
+    },
+    {
+      "day": 3,
+      "from": "19:10",
+      "to": "20:00",
+      "time_tolerance": 20,
+      "danger_coof": -1,
+      "description": "Child help"
+    },
+    {
+      "day": 3,
+      "from": "20:00",
+      "to": "20:10",
+      "time_tolerance": 10,
+      "danger_coof": 1,
+      "description": "Going home"
+    },
+    {
+      "day": 4,
+      "from": "9:00",
+      "to": "9:30",
+      "time_tolerance": 10,
+      "danger_coof": 1,
+      "description": "Going to lesson in 5B, 25 or 27 c."
+    },
+    {
+      "day": 4,
+      "from": "9:30",
+      "to": "10:15",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 5B, 25 or 27 c."
+    },
+    {
+      "day": 4,
+      "from": "10:15",
+      "to": "11:25",
+      "time_tolerance": 2,
+      "danger_coof": 0.5,
+      "description": "Undefined"
+    },
+    {
+      "day": 4,
+      "from": "11:25",
+      "to": "12:10",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 8V, 28 or 29 c."
+    },
+    {
+      "day": 4,
+      "from": "12:10",
+      "to": "12:25",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 4,
+      "from": "12:25",
+      "to": "13:10",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 8B, 28, 29 c."
+    },
+    {
+      "day": 4,
+      "from": "13:10",
+      "to": "14:20",
+      "time_tolerance": 2,
+      "danger_coof": 0.5,
+      "description": "Undefined"
+    },
+    {
+      "day": 4,
+      "from": "14:20",
+      "to": "15:05",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 4A, 9 c."
+    },
+    {
+      "day": 4,
+      "from": "15:05",
+      "to": "15:20",
+      "time_tolerance": 2,
+      "danger_coof": 1,
+      "description": "Transfer"
+    },
+    {
+      "day": 4,
+      "from": "15:20",
+      "to": "16:05",
+      "time_tolerance": 2,
+      "danger_coof": -1,
+      "description": "Lesson in 3B, 9 c."
+    },
+    {
+      "day": 4,
+      "from": "16:05",
+      "to": "16:20",
+      "time_tolerance": 10,
+      "danger_coof": 1,
+      "description": "Going home"
+    }
+  ]`;

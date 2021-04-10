@@ -1,0 +1,137 @@
+const timeline_whole_day_canvas = document.getElementById("timeline-whole-day");
+const date_time_element = document.getElementById("date_time");
+const day_picker = document.getElementById("slct");
+const date_time_mouse_picker_time = document.getElementById("mouse_time_pick_info_time");
+const date_time_mouse_picker_danger_header = document.getElementById("mouse_time_pick_danger_header");
+const date_time_mouse_picker_events = document.getElementById("mouse_time_pick_events");
+const timeline_whole_day_width = timeline_whole_day_canvas.clientWidth;
+let timetable = JSON.parse(timetable_json);
+var ctx = timeline_whole_day_canvas.getContext("2d");
+
+// timeline from 7 am to 8 pm in h
+const time_from = 8*60;
+const time_to = 20*60;
+const time_interval = time_to-time_from;
+
+let current_day_num;
+let current_day_timeline;
+
+/*
+day timeline datatype
+all timeline by default is empty
+array of events, each element has:
+    day
+    from - timestamp
+    to - timestamp
+    time_tolerance - linear
+    danger_coof
+    description - string
+*/
+
+const getTimeFromTimeString = (stamp_string)=>{
+    [hours, minutes] = stamp_string.trim().split(':');
+    return +hours*60+ +minutes;
+}
+
+const generateTimelineArray = (events, day)=>{
+    let out = Array(time_interval).fill().map(el=>{return {
+        danger_coof: 0.20,
+        events: []
+    };});
+    events.forEach(el => {
+        if(el.day==-1 || el.day==day)
+            for(let i = Math.max(el.from-el.time_tolerance,0);i<=Math.min(el.to+el.time_tolerance, out.length-1);i++)
+            {
+                out[i].danger_coof+=el.danger_coof*(1/(el.from>i?Math.abs(el.from-i+1):i>el.to?Math.abs(el.to-i-1):1));
+                out[i].events.push(el);
+            }
+    });
+    
+    function clamp(num, min, max) {
+        return num <= min ? min : num >= max ? max : num;
+    }
+
+    out.forEach(el=>el.danger_coof=clamp(el.danger_coof, 0, 1));
+    return out;
+};
+
+const getColorStringFromDangerCoof = (coof)=>{
+    const color_palette = [
+        "#339900",
+        "#99cc33",
+        "#ffcc00",
+        "#ff9966",
+        "#cc3300",
+    ];
+    return color_palette[Math.min(Math.floor(coof*5),color_palette.length-1)];
+        
+}
+
+const drawDangerTimeline = (ctx, from, to, dataset, currTimeStampVal)=>{
+    const width = timeline_whole_day_width/(to-from);
+    for(let i=from;i<=to;i++)
+    {
+        ctx.lineWidth = 0;
+        ctx.fillStyle = getColorStringFromDangerCoof(dataset[i].danger_coof);
+        ctx.fillRect(Math.floor(i*width), 0, Math.ceil(width), 100);
+    }
+
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(Math.floor((currTimeStampVal-1)*width), 0, Math.ceil(width), 100);
+};
+
+const output_whole_day_mousepick = (mousex)=>{
+    let time = Math.round(mousex/timeline_whole_day_width*time_interval)+time_from;
+    let curr = current_day_timeline[time-time_from];
+    date_time_mouse_picker_danger_header.innerText = "Danger: "+Math.round(curr.danger_coof*100)+"%";
+    let temp_s = "";
+    curr.events.forEach(el=>{
+        temp_s+=el.description+"<br/>";
+    });
+    date_time_mouse_picker_events.innerHTML = temp_s;
+    date_time_mouse_picker_time.innerText = Math.floor(time/60)+":"+String(time%60).padStart(2,0);
+}
+
+const update_time = ()=>{
+    const curr_time = getTimeFromTimeString(new Date().getHours()+":"+new Date().getMinutes())-time_from;
+    date_time_element.innerText = new Date().toLocaleTimeString();
+};
+
+const date_time_loop = setInterval(()=>{
+    update_time();
+},333);
+
+const timeline_redraw_loop = setInterval(()=>{
+    drawDangerTimeline(ctx, 0, time_interval-1, current_day_timeline,getTimeFromTimeString(new Date().getHours()+":"+new Date().getMinutes())-time_from );
+},800);
+
+timeline_whole_day_canvas.addEventListener("mousemove", e=>{
+    output_whole_day_mousepick(e.offsetX);
+});
+
+const update_all = ()=>{
+    update_time();
+    drawDangerTimeline(ctx, 0, time_interval-1, current_day_timeline,getTimeFromTimeString(new Date().getHours()+":"+new Date().getMinutes())-time_from )
+};
+
+const change_day = (day)=>{
+    current_day_num = Math.min(day,4);
+    day_picker.value = current_day_num;
+    current_day_timeline = generateTimelineArray(timetable, current_day_num);
+    update_all();
+};
+
+day_picker.addEventListener("change", ()=>{
+    change_day(day_picker.value);
+});
+
+const init = ()=>{
+    timetable.forEach(el=>{
+        el.from = getTimeFromTimeString(el.from)-time_from;
+        el.to = getTimeFromTimeString(el.to)-time_from;
+    });
+    change_day(new Date().getDay());
+    output_whole_day_mousepick(0);
+};
+
+init();
