@@ -84,6 +84,11 @@ const getColorStringFromDangerCoof = (coof)=>{
         
 }
 
+const is_time_valid = ()=>{
+    const curr = new Date();
+    return curr.getHours()>8 && curr.getHours()<20;
+}
+
 const drawDangerTimeline = (ctx, from, to, dataset, currTimeStampVal)=>{
     const width = timeline_whole_day_width/(to-from);
     for(let i=from;i<=to;i++)
@@ -116,7 +121,10 @@ const output_whole_day_mousepick = (mousex)=>{
 
 const update_time = ()=>{
     const curr_time = getTimeFromTimeString(new Date().getHours()+":"+new Date().getMinutes())-time_from;
-    document.body.style.background = getColorStringFromDangerCoof(current_day_timeline[curr_time].danger_coof);
+    if(is_time_valid())
+        document.body.style.background = getColorStringFromDangerCoof(current_day_timeline[curr_time].danger_coof);
+    else
+        document.body.style.background = "rgb(0,0,0)";
     date_time_element.innerText = new Date().toLocaleTimeString() + " " + days[new Date().getDay()];
 };
 
@@ -125,6 +133,13 @@ const date_time_loop = setInterval(()=>{
     if(tracking)
     {
         let time = getTimeFromTimeString(new Date().getHours()+":"+new Date().getMinutes());
+        if(!is_time_valid())
+        {
+            tracking = false;
+            tracking_toggle.checked = false;
+            alert("Tracking works only from 8 am to 8 pm");
+            return;
+        }
         output_info(time);
     }
 },333);

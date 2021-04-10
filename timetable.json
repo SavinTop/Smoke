@@ -292,7 +292,7 @@ timetable_json = `[
       "from": "9:15",
       "to": "10:10",
       "time_tolerance": 2,
-      "danger_coof": 1,
+      "danger_coof": 0.5,
       "description": "Transfer"
     },
     {
@@ -348,7 +348,7 @@ timetable_json = `[
       "from": "13:10",
       "to": "14:20",
       "time_tolerance": 2,
-      "danger_coof": 1,
+      "danger_coof": 0.5,
       "description": "Transfer"
     },
     {
