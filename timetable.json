@@ -92,7 +92,7 @@ timetable_json = `[
       "from": "8:30",
       "to": "9:15",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 5A, 28 or 29 c."
     },
     {
@@ -108,7 +108,7 @@ timetable_json = `[
       "from": "9:30",
       "to": "10:15",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 9V, 3 or 25 c."
     },
     {
@@ -124,7 +124,7 @@ timetable_json = `[
       "from": "10:25",
       "to": "11:10",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 5V, 3 or 28 c."
     },
     {
@@ -133,20 +133,20 @@ timetable_json = `[
       "to": "12:20",
       "time_tolerance": 10,
       "danger_coof": 0.5,
-      "description": "Undefined, her free time"
+      "description": "Undefined"
     },
     {
       "day": 0,
       "from": "12:20",
       "to": "13:20",
       "time_tolerance": 20,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Child support:d"
     },
     {
       "day": 0,
       "from": "13:20",
-      "to": "13:40",
+      "to": "13:45",
       "time_tolerance": 10,
       "danger_coof": 1,
       "description": "Going home"
@@ -164,13 +164,13 @@ timetable_json = `[
       "from": "15:20",
       "to": "16:05",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 4V, 9 c."
     },
     {
       "day": 0,
       "from": "16:05",
-      "to": "16:15",
+      "to": "16:25",
       "time_tolerance": 10,
       "danger_coof": 1,
       "description": "Going home"
@@ -188,13 +188,13 @@ timetable_json = `[
       "from": "9:30",
       "to": "10:15",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 9V, 25 or 36 c."
     },
     {
       "day": 1,
       "from": "10:15",
-      "to": "10:25",
+      "to": "10:40",
       "time_tolerance": 10,
       "danger_coof": 1,
       "description": "Going home"
@@ -212,7 +212,7 @@ timetable_json = `[
       "from": "12:25",
       "to": "13:10",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 5B, 28 of 29 c."
     },
     {
@@ -228,7 +228,7 @@ timetable_json = `[
       "from": "13:25",
       "to": "14:10",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 8B, 27 or 29 c."
     },
     {
@@ -244,7 +244,7 @@ timetable_json = `[
       "from": "14:20",
       "to": "15:05",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 4A, 9 c."
     },
     {
@@ -260,13 +260,13 @@ timetable_json = `[
       "from": "15:20",
       "to": "16:05",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 4V, 9c."
     },
     {
       "day": 1,
       "from": "16:05",
-      "to": "16:20",
+      "to": "16:30",
       "time_tolerance": 1,
       "danger_coof": 1,
       "description": "Going home"
@@ -284,7 +284,7 @@ timetable_json = `[
       "from": "8:30",
       "to": "9:15",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 5V, 28 or 29 c."
     },
     {
@@ -297,8 +297,8 @@ timetable_json = `[
     },
     {
       "day": 2,
-      "from": "9:15",
-      "to": "10:10",
+      "from": "10:10",
+      "to": "10:25",
       "time_tolerance": 2,
       "danger_coof": 1,
       "description": "Dining room"
@@ -308,7 +308,7 @@ timetable_json = `[
       "from": "10:25",
       "to": "11:10",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 8V, 27 or 28 c."
     },
     {
@@ -324,7 +324,7 @@ timetable_json = `[
       "from": "11:25",
       "to": "12:10",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 8B, 28, 29 c."
     },
     {
@@ -340,7 +340,7 @@ timetable_json = `[
       "from": "12:25",
       "to": "13:10",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 5A, 27 or 29 c."
     },
     {
@@ -356,7 +356,7 @@ timetable_json = `[
       "from": "14:20",
       "to": "15:05",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 4A, 9 c."
     },
     {
@@ -372,7 +372,7 @@ timetable_json = `[
       "from": "15:20",
       "to": "16:05",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 3B, 9 c."
     },
     {
@@ -388,7 +388,7 @@ timetable_json = `[
       "from": "16:20",
       "to": "17:05",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 4V, 9 c."
     },
     {
@@ -412,7 +412,7 @@ timetable_json = `[
       "from": "8:30",
       "to": "9:15",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 8V, 28 or 29 c."
     },
     {
@@ -428,7 +428,7 @@ timetable_json = `[
       "from": "9:30",
       "to": "10:15",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 9V, 25, 27 c."
     },
     {
@@ -444,7 +444,7 @@ timetable_json = `[
       "from": "10:25",
       "to": "11:10",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 5A, 27, 35 c."
     },
     {
@@ -460,7 +460,7 @@ timetable_json = `[
       "from": "11:25",
       "to": "12:10",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 5V, 27, 38 c."
     },
     {
@@ -476,13 +476,13 @@ timetable_json = `[
       "from": "12:25",
       "to": "13:10",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 5B, 28, 29 c."
     },
     {
       "day": 3,
       "from": "13:10",
-      "to": "13:20",
+      "to": "13:30",
       "time_tolerance": 10,
       "danger_coof": 1,
       "description": "Going home"
@@ -500,13 +500,13 @@ timetable_json = `[
       "from": "15:20",
       "to": "16:05",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 3B, 9 c."
     },
     {
       "day": 3,
       "from": "16:05",
-      "to": "16:20",
+      "to": "16:35",
       "time_tolerance": 10,
       "danger_coof": 1,
       "description": "Going home"
@@ -524,13 +524,13 @@ timetable_json = `[
       "from": "19:10",
       "to": "20:00",
       "time_tolerance": 20,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Child help"
     },
     {
       "day": 3,
       "from": "20:00",
-      "to": "20:10",
+      "to": "20:20",
       "time_tolerance": 10,
       "danger_coof": 1,
       "description": "Going home"
@@ -548,7 +548,7 @@ timetable_json = `[
       "from": "9:30",
       "to": "10:15",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 5B, 25 or 27 c."
     },
     {
@@ -564,7 +564,7 @@ timetable_json = `[
       "from": "11:25",
       "to": "12:10",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 8V, 28 or 29 c."
     },
     {
@@ -580,7 +580,7 @@ timetable_json = `[
       "from": "12:25",
       "to": "13:10",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 8B, 28, 29 c."
     },
     {
@@ -596,7 +596,7 @@ timetable_json = `[
       "from": "14:20",
       "to": "15:05",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 4A, 9 c."
     },
     {
@@ -612,13 +612,13 @@ timetable_json = `[
       "from": "15:20",
       "to": "16:05",
       "time_tolerance": 2,
-      "danger_coof": -1,
+      "danger_coof": -0.2,
       "description": "Lesson in 3B, 9 c."
     },
     {
       "day": 4,
       "from": "16:05",
-      "to": "16:20",
+      "to": "16:30",
       "time_tolerance": 10,
       "danger_coof": 1,
       "description": "Going home"
