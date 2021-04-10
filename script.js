@@ -9,6 +9,8 @@ const date_time_mouse_picker_events = document.getElementById("mouse_time_pick_e
 const timeline_whole_day_width = timeline_whole_day_canvas.clientWidth;
 let timetable = JSON.parse(timetable_json);
 
+const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
 const timeline_whole_day_ctx = timeline_whole_day_canvas.getContext("2d");
 
 let tracking = false;
@@ -115,7 +117,7 @@ const output_whole_day_mousepick = (mousex)=>{
 const update_time = ()=>{
     const curr_time = getTimeFromTimeString(new Date().getHours()+":"+new Date().getMinutes())-time_from;
     document.body.style.background = getColorStringFromDangerCoof(current_day_timeline[curr_time].danger_coof);
-    date_time_element.innerText = new Date().toLocaleTimeString();
+    date_time_element.innerText = new Date().toLocaleTimeString() + " " + days[new Date().getDay()];
 };
 
 const date_time_loop = setInterval(()=>{
@@ -145,7 +147,7 @@ const update_all = ()=>{
 };
 
 const change_day = (day)=>{
-    current_day_num = Math.min(day,4);
+    current_day_num = Math.max(Math.min(day,4), 0);
     day_picker.value = current_day_num;
     current_day_timeline = generateTimelineArray(timetable, current_day_num);
     update_all();
@@ -170,7 +172,7 @@ const init = ()=>{
         el.from = getTimeFromTimeString(el.from)-time_from;
         el.to = getTimeFromTimeString(el.to)-time_from;
     });
-    change_day(new Date().getDay());
+    change_day(new Date().getDay()-1);
     output_whole_day_mousepick(0);
 };
 
