@@ -1,12 +1,18 @@
 const timeline_whole_day_canvas = document.getElementById("timeline-whole-day");
 const date_time_element = document.getElementById("date_time");
+const tracking_toggle = document.getElementById("tracking-toggle");
+const tolerance_toggle = document.getElementById("tolerance-toggle");
 const day_picker = document.getElementById("slct");
 const date_time_mouse_picker_time = document.getElementById("mouse_time_pick_info_time");
 const date_time_mouse_picker_danger_header = document.getElementById("mouse_time_pick_danger_header");
 const date_time_mouse_picker_events = document.getElementById("mouse_time_pick_events");
 const timeline_whole_day_width = timeline_whole_day_canvas.clientWidth;
 let timetable = JSON.parse(timetable_json);
-var ctx = timeline_whole_day_canvas.getContext("2d");
+
+const timeline_whole_day_ctx = timeline_whole_day_canvas.getContext("2d");
+
+let tracking = false;
+let tolerance = true;
 
 // timeline from 7 am to 8 pm in h
 const time_from = 8*60;
@@ -40,11 +46,20 @@ const generateTimelineArray = (events, day)=>{
     };});
     events.forEach(el => {
         if(el.day==-1 || el.day==day)
-            for(let i = Math.max(el.from-el.time_tolerance,0);i<=Math.min(el.to+el.time_tolerance, out.length-1);i++)
+        {
+            let start=el.from, end=el.to;
+            if(tolerance)
+            {
+                start = Math.max(el.from-el.time_tolerance,0);
+                end = Math.min(el.to+el.time_tolerance, out.length-1);
+            }
+            for(let i = start;i<=end;i++)
             {
                 out[i].danger_coof+=el.danger_coof*(1/(el.from>i?Math.abs(el.from-i+1):i>el.to?Math.abs(el.to-i-1):1));
                 out[i].events.push(el);
             }
+        }
+            
     });
     
     function clamp(num, min, max) {
@@ -80,8 +95,7 @@ const drawDangerTimeline = (ctx, from, to, dataset, currTimeStampVal)=>{
     ctx.fillRect(Math.floor((currTimeStampVal-1)*width), 0, Math.ceil(width), 100);
 };
 
-const output_whole_day_mousepick = (mousex)=>{
-    let time = Math.round(mousex/timeline_whole_day_width*time_interval)+time_from;
+const output_info = (time)=>{
     let curr = current_day_timeline[time-time_from];
     date_time_mouse_picker_danger_header.innerText = "Danger: "+Math.round(curr.danger_coof*100)+"%";
     let temp_s = "";
@@ -92,17 +106,33 @@ const output_whole_day_mousepick = (mousex)=>{
     date_time_mouse_picker_time.innerText = Math.floor(time/60)+":"+String(time%60).padStart(2,0);
 }
 
+const output_whole_day_mousepick = (mousex)=>{
+    if(tracking) return;
+    let time = Math.round(mousex/timeline_whole_day_width*time_interval)+time_from;
+    output_info(time);
+}
+
 const update_time = ()=>{
     const curr_time = getTimeFromTimeString(new Date().getHours()+":"+new Date().getMinutes())-time_from;
+    document.body.style.background = getColorStringFromDangerCoof(current_day_timeline[curr_time].danger_coof);
     date_time_element.innerText = new Date().toLocaleTimeString();
 };
 
 const date_time_loop = setInterval(()=>{
     update_time();
+    if(tracking)
+    {
+        let time = getTimeFromTimeString(new Date().getHours()+":"+new Date().getMinutes());
+        output_info(time);
+    }
 },333);
 
+const update_whole_timeline = ()=>{
+    drawDangerTimeline(timeline_whole_day_ctx, 0, time_interval-1, current_day_timeline,getTimeFromTimeString(new Date().getHours()+":"+new Date().getMinutes())-time_from );
+};
+
 const timeline_redraw_loop = setInterval(()=>{
-    drawDangerTimeline(ctx, 0, time_interval-1, current_day_timeline,getTimeFromTimeString(new Date().getHours()+":"+new Date().getMinutes())-time_from );
+    update_whole_timeline();
 },800);
 
 timeline_whole_day_canvas.addEventListener("mousemove", e=>{
@@ -111,7 +141,7 @@ timeline_whole_day_canvas.addEventListener("mousemove", e=>{
 
 const update_all = ()=>{
     update_time();
-    drawDangerTimeline(ctx, 0, time_interval-1, current_day_timeline,getTimeFromTimeString(new Date().getHours()+":"+new Date().getMinutes())-time_from )
+    update_whole_timeline();
 };
 
 const change_day = (day)=>{
@@ -123,6 +153,16 @@ const change_day = (day)=>{
 
 day_picker.addEventListener("change", ()=>{
     change_day(day_picker.value);
+});
+
+tracking_toggle.addEventListener("click", ()=>{
+    tracking = tracking_toggle.checked;
+});
+
+tolerance_toggle.addEventListener("click", ()=>{
+    tolerance = tolerance_toggle.checked;
+    current_day_timeline = generateTimelineArray(timetable, current_day_num);
+    update_all();
 });
 
 const init = ()=>{
