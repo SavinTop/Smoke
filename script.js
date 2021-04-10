@@ -1,6 +1,7 @@
 const timeline_whole_day_canvas = document.getElementById("timeline-whole-day");
 const date_time_element = document.getElementById("date_time");
 const tracking_toggle = document.getElementById("tracking-toggle");
+const header_image = document.getElementById("header_image");
 const tolerance_toggle = document.getElementById("tolerance-toggle");
 const day_picker = document.getElementById("slct");
 const date_time_mouse_picker_time = document.getElementById("mouse_time_pick_info_time");
@@ -8,6 +9,35 @@ const date_time_mouse_picker_danger_header = document.getElementById("mouse_time
 const date_time_mouse_picker_events = document.getElementById("mouse_time_pick_events");
 const timeline_whole_day_width = timeline_whole_day_canvas.clientWidth;
 let timetable = JSON.parse(timetable_json);
+let last_h;
+
+const image_names = [
+    "stars.gif", //00 00
+    "sleep.gif", // 01 00
+    "ghost.gif", // 02 00
+    "crying_hand.gif", // 03 00
+    "crying.gif", // 04 00
+    "rain.gif", // 05 00
+    "tears.gif", // 06 00
+    "cat.gif", // 07 00
+    "anime_girl.gif", // 08 00
+    "doggy.gif", // 09 00
+    "girl.gif", // 10 00
+    "child.gif", // 11 00
+    "alg.gif", // 12 00
+    "anime_2.gif", // 13 00
+    "111.gif", // 14 00
+    "1111.gif", // 15 00
+    "dog.gif", // 16 00
+    "duck.gif", // 17 00
+    "homer.gif", // 18 00
+    "sun.gif", //19 00
+    "tnt.gif", // 20 00
+    "square.gif", // 21 00
+    "new_header.gif", // 22 00
+    "robot.gif" // 23 00
+];
+
 var notyf = new Notyf({types: [
     {
       type: 'warning',
@@ -53,6 +83,10 @@ array of events, each element has:
     danger_coof
     description - string
 */
+
+const setImage = (id)=>{
+    header_image.src = "images/"+image_names[id];
+};
 
 const getTimeFromTimeString = (stamp_string)=>{
     [hours, minutes] = stamp_string.trim().split(':');
@@ -142,11 +176,22 @@ const update_time = ()=>{
     if(is_time_valid())
         document.body.style.background = getColorStringFromDangerCoof(current_day_timeline[curr_time].danger_coof);
     else
-        document.body.style.background = "rgb(0,0,0)";
+    {
+        document.body.style.backgroundColor = "black";
+        document.body.style.backgroundImage = "url('images/stars_back.gif')";
+    }
+        
     date_time_element.innerText = new Date().toLocaleTimeString() + " " + days[new Date().getDay()];
 };
 
 const date_time_loop = setInterval(()=>{
+    let curr_h = new Date().getHours();
+    if(curr_h!=last_h)
+    {
+        setImage(curr_h);
+        last_h = curr_h;
+    }
+
     update_time();
     if(tracking)
     {
@@ -207,6 +252,8 @@ const init = ()=>{
     });
     change_day(new Date().getDay()-1);
     output_whole_day_mousepick(0);
+    setImage(new Date().getHours());
+    last_h = new Date().getHours();
 };
 
 init();
