@@ -7,6 +7,7 @@
 #mouse_time_pick_info_time{
     font-size: 3em;
     color: #FFF;
+    cursor: pointer;
 }
 
 #mouse_time_pick_danger_header{
@@ -22,7 +23,7 @@
 }
 
 #timeline_block{
-    border: 2px solid black;
+    border: 3px solid black;
     border-radius: 50px;
     display: flex;
     flex-direction: column;
@@ -39,9 +40,9 @@
     width: 20em;
     margin: 1%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     background: #23272A;
 }
 
