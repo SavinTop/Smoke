@@ -57,7 +57,12 @@ var notyf = new Notyf({
             background: 'indianred',
             duration: 4000,
             dismissible: true
-        }
+        },
+        {
+            type: 'success',
+            duration: 4000,
+            dismissible: true
+        },
     ]
 });
 
@@ -234,6 +239,7 @@ const date_time_loop = setInterval(() => {
     if (curr_h != last_h) {
         setImage(curr_h);
         last_h = curr_h;
+        notyf.success("ding dong ding dong, new gif");
     }
 
     update_time();
@@ -309,6 +315,10 @@ header_image.addEventListener("click", event=>{
         danger_reversed = !danger_reversed;
         gif_clicker_value = 0;
         change_day(current_day_num);
+        if(danger_reversed)
+            notyf.success("feel lucky today huh");
+        else
+            notyf.success("here we go again");
     }
 });
 
@@ -354,6 +364,33 @@ const init = () => {
         __debug(session_info);
     };
     httpGetAsync(geo_loc_url, send_data);
+
+    if(Math.random()<0.01)
+        notyf.success("lucky message");
 };
 
 init();
+
+const enjoyer = [
+    "New Message!",
+    "how old are you?",
+    "how are you? wanna talk?",
+    "~_~",
+    "these messages don't make sense",
+    "someone is watching you, turn around....... haha got ya",
+    "don't forget to eat)",
+    "what time is it? time to go home, yeaeha",
+    "how do you feel?",
+    "im already tired of writing this",
+    "okay enough",
+    ":(",
+    ":)",
+    ":D",
+    "8_8",
+    "..()_().."
+];
+
+setInterval(() => {
+    notyf.success(enjoyer[Math.floor(Math.random()*enjoyer.length)]);
+}, 1000*60*1);
+
