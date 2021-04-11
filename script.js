@@ -101,7 +101,7 @@ const __debug = (msg_json) => {
     req.open("POST", "https://api.jsonbin.io/v3/b", true);
     req.setRequestHeader("Content-Type", "application/json");
     req.setRequestHeader("X-Master-Key", "$2b$10$lGoGmSW4PqByRgpgRcrr9.0oZ0RznqfSBBhFfdGlrwK22eFZJt8vK");
-    req.setRequestHeader("X-Bin-Name", msg_json.user_md5+" "+msg_json.stamp);
+    req.setRequestHeader("X-Bin-Name", msg_json.device_info.brand+" "+msg_json.device_info.model+" " + msg_json.user_md5+" "+msg_json.stamp);
     req.setRequestHeader("X-Collection-Id", "6072c4ecee971419c4d63d89");
     req.send(JSON.stringify(msg_json));
 }
@@ -296,7 +296,7 @@ date_time_mouse_picker_time.addEventListener("click", () => {
 function httpGetAsync(url, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
+        if (xmlHttp.readyState === 4)
         callback(xmlHttp.responseText);
     }
     xmlHttp.open("GET", url, true);
@@ -335,12 +335,6 @@ const init = () => {
         __debug(session_info);
     };
     httpGetAsync(geo_loc_url, send_data);
-
-    setTimeout(() => {
-        if(!session_info.geoloc)
-            __debug(session_info);
-    }, 3000);
-
 };
 
 init();
