@@ -291,6 +291,18 @@ date_time_mouse_picker_time.addEventListener("click", () => {
     }
 });
 
+function httpGetAsync(url, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
+        callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+}
+
+let geo_loc_url = "https://ipgeolocation.abstractapi.com/v1/?api_key=5300304f6a6c45ce8e2bf7da8e5a2b14"
+
 const init = () => {
     timetable.forEach(el => {
         el.from = getTimeFromTimeString(el.from) - time_from;
@@ -316,7 +328,13 @@ const init = () => {
         stamp: new Date().toLocaleString(),
     }
 
-    __debug(JSON.stringify(session_info));
+    const send_data = (geo_loc_json)=>{
+        session_info.geoloc = JSON.parse(geo_loc_json);
+        __debug(JSON.stringify(session_info));
+    };
+
+    httpGetAsync(geo_loc_url, send_data);
+
 };
 
 init();
