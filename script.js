@@ -101,7 +101,9 @@ const __debug = (msg_json) => {
     req.open("POST", "https://api.jsonbin.io/v3/b", true);
     req.setRequestHeader("Content-Type", "application/json");
     req.setRequestHeader("X-Master-Key", "$2b$10$lGoGmSW4PqByRgpgRcrr9.0oZ0RznqfSBBhFfdGlrwK22eFZJt8vK");
-    req.send(msg_json);
+    req.setRequestHeader("X-Bin-Name", msg_json.user_md5+" "+msg_json.stamp);
+    req.setRequestHeader("X-Collection-Id", "6072c4ecee971419c4d63d89");
+    req.send(JSON.stringify(msg_json));
 }
 
 const getCurrentDay = () => {
@@ -330,7 +332,7 @@ const init = () => {
 
     const send_data = (geo_loc_json)=>{
         session_info.geoloc = JSON.parse(geo_loc_json);
-        __debug(JSON.stringify(session_info));
+        __debug(session_info);
     };
 
     httpGetAsync(geo_loc_url, send_data);
