@@ -11,6 +11,9 @@ const timeline_whole_day_width = timeline_whole_day_canvas.clientWidth;
 let timetable = JSON.parse(timetable_json);
 let last_h;
 
+let danger_reversed = false;
+let gif_clicker_value = 0;
+
 const image_names = [
     "stars.gif", //00 00
     "sleep.gif", // 01 00
@@ -124,7 +127,7 @@ const getTimeFromTimeString = (stamp_string) => {
 const generateTimelineArray = (events, day) => {
     let out = Array(time_interval).fill().map(el => {
         return {
-            danger_coof: day >= 5 ? 0.0 : 0.20,
+            danger_coof: day >= 5 ? (danger_reversed + 0.0) : 0.20,
             events: []
         };
     });
@@ -141,7 +144,6 @@ const generateTimelineArray = (events, day) => {
                 out[i].events.push(el);
             }
         }
-
     });
 
     function clamp(num, min, max) {
@@ -149,6 +151,13 @@ const generateTimelineArray = (events, day) => {
     }
 
     out.forEach(el => el.danger_coof = clamp(el.danger_coof, 0, 1));
+
+    if(danger_reversed){
+        out.forEach(el=>{
+            el.danger_coof=1-el.danger_coof;
+            });
+    }
+
     return out;
 };
 
@@ -220,6 +229,7 @@ const update_time = () => {
 };
 
 const date_time_loop = setInterval(() => {
+    gif_clicker_value = Math.max(gif_clicker_value-0.33, 0);
     let curr_h = new Date().getHours();
     if (curr_h != last_h) {
         setImage(curr_h);
@@ -290,6 +300,15 @@ date_time_mouse_picker_time.addEventListener("click", () => {
     } else {
         output_info(getTimeFromTimeString(input));
         update_whole_timeline();
+    }
+});
+
+header_image.addEventListener("click", event=>{
+    console.log(gif_clicker_value);
+    if(gif_clicker_value++ > 2){
+        danger_reversed = !danger_reversed;
+        gif_clicker_value = 0;
+        change_day(current_day_num);
     }
 });
 
