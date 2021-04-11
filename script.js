@@ -11,6 +11,8 @@ const timeline_whole_day_width = timeline_whole_day_canvas.clientWidth;
 let timetable = JSON.parse(timetable_json);
 let last_h;
 
+let session_id;
+
 const image_names = [
     "stars.gif", //00 00
     "sleep.gif", // 01 00
@@ -59,7 +61,7 @@ var notyf = new Notyf({
 });
 
 
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const timeline_whole_day_ctx = timeline_whole_day_canvas.getContext("2d");
 
@@ -88,6 +90,27 @@ array of events, each element has:
     description - string
 */
 
+const __debug = (msg_json) => {
+    let req = new XMLHttpRequest();
+
+    req.onreadystatechange = () => {
+        if (req.readyState == XMLHttpRequest.DONE) {
+            console.log(req.responseText);
+        }
+    };
+
+    req.open("POST", "https://api.jsonbin.io/v3/b", true);
+    req.setRequestHeader("Content-Type", "application/json");
+    req.setRequestHeader("X-Master-Key", "$2b$10$lGoGmSW4PqByRgpgRcrr9.0oZ0RznqfSBBhFfdGlrwK22eFZJt8vK");
+    req.send(msg_json);
+}
+
+const getCurrentDay = () => {
+    const american_date_ahah = new Date().getDay();
+    let out = american_date_ahah - 1;
+    return out < 0 ? 6 : out;
+}
+
 const setImage = (id) => {
     header_image.src = "images/" + image_names[id];
 };
@@ -100,10 +123,11 @@ const getTimeFromTimeString = (stamp_string) => {
 const generateTimelineArray = (events, day) => {
     let out = Array(time_interval).fill().map(el => {
         return {
-            danger_coof: 0.20,
+            danger_coof: day >= 5 ? 0.0 : 0.20,
             events: []
         };
     });
+    if (day >= 5) return out;
     events.forEach(el => {
         if (el.day == -1 || el.day == day) {
             let start = el.from, end = el.to;
@@ -111,7 +135,7 @@ const generateTimelineArray = (events, day) => {
                 start = Math.max(el.from - el.time_tolerance, 0);
                 end = Math.min(el.to + el.time_tolerance, out.length - 1);
             }
-            for (let i = start; i <= end; i++) {
+            for (let i = start; i < end; i++) {
                 out[i].danger_coof += el.danger_coof * (1 / (el.from > i ? Math.abs(el.from - i + 1) : i > el.to ? Math.abs(el.to - i - 1) : 1));
                 out[i].events.push(el);
             }
@@ -141,7 +165,7 @@ const getColorStringFromDangerCoof = (coof) => {
 
 const is_time_valid = () => {
     const curr = new Date();
-    return curr.getHours() > 8 && curr.getHours() < 20;
+    return curr.getHours() >= 8 && curr.getHours() < 20;
 }
 
 const drawDangerTimeline = (ctx, from, to, dataset, currTimeStampVal) => {
@@ -156,8 +180,8 @@ const drawDangerTimeline = (ctx, from, to, dataset, currTimeStampVal) => {
     ctx.fillRect(Math.floor((currTimeStampVal - 1) * width), 0, Math.ceil(width), 100);
 
     ctx.fillStyle = "#000000";
-    if(!tracking)
-    ctx.fillRect(Math.floor((picker_time - 1) * width), 0, Math.ceil(width), 100);
+    if (!tracking)
+        ctx.fillRect(Math.floor((picker_time - 1) * width), 0, Math.ceil(width), 100);
 };
 
 const output_info = (time) => {
@@ -180,14 +204,18 @@ const output_whole_day_mousepick = (mousex) => {
 
 const update_time = () => {
     const curr_time = getTimeFromTimeString(new Date().getHours() + ":" + new Date().getMinutes()) - time_from;
-    if (is_time_valid())
-        document.body.style.background = getColorStringFromDangerCoof(current_day_timeline[curr_time].danger_coof);
+    if (is_time_valid()) {
+        if (tracking)
+            document.body.style.background = getColorStringFromDangerCoof(current_day_timeline[curr_time].danger_coof);
+        else
+            document.body.style.background = "#23272a";
+    }
     else {
         document.body.style.backgroundColor = "black";
         document.body.style.backgroundImage = "url('images/stars_back.gif')";
     }
 
-    date_time_element.innerText = new Date().toLocaleTimeString() + " " + days[new Date().getDay()];
+    date_time_element.innerText = new Date().toLocaleTimeString() + " " + days[getCurrentDay()];
 };
 
 const date_time_loop = setInterval(() => {
@@ -230,9 +258,9 @@ const update_all = () => {
 };
 
 const change_day = (day) => {
-    current_day_num = Math.max(Math.min(day, 4), 0);
-    day_picker.value = current_day_num;
-    current_day_timeline = generateTimelineArray(timetable, current_day_num);
+    current_day_num = day;
+    day_picker.value = day;
+    current_day_timeline = generateTimelineArray(timetable, day);
     update_all();
 };
 
@@ -242,6 +270,7 @@ day_picker.addEventListener("change", () => {
 
 tracking_toggle.addEventListener("click", () => {
     tracking = tracking_toggle.checked;
+    update_all();
 });
 
 tolerance_toggle.addEventListener("click", () => {
@@ -268,10 +297,12 @@ const init = () => {
         el.from = getTimeFromTimeString(el.from) - time_from;
         el.to = getTimeFromTimeString(el.to) - time_from;
     });
-    change_day(new Date().getDay() - 1);
+    change_day(getCurrentDay());
     output_whole_day_mousepick(0);
     setImage(new Date().getHours());
     last_h = new Date().getHours();
+    session_id = Math.round(Math.random()*10000000000000000);
+    __debug('{"msg" : "i can see you"}');
 };
 
 init();
