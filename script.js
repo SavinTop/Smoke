@@ -11,9 +11,6 @@ const timeline_whole_day_width = timeline_whole_day_canvas.clientWidth;
 let timetable = JSON.parse(timetable_json);
 let last_h;
 
-let session_id;
-let session_info;
-
 const image_names = [
     "stars.gif", //00 00
     "sleep.gif", // 01 00
@@ -98,19 +95,14 @@ const __debug = (msg_json) => {
 
     req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE) {
-            console.log(req.responseText);
         }
     };
-    if(!debug) return;
+    
     req.open("POST", "https://api.jsonbin.io/v3/b", true);
     req.setRequestHeader("Content-Type", "application/json");
     req.setRequestHeader("X-Master-Key", "$2b$10$lGoGmSW4PqByRgpgRcrr9.0oZ0RznqfSBBhFfdGlrwK22eFZJt8vK");
     req.send(msg_json);
 }
-
-const log = (str)=>{
-    session_info.logs.push(new Date().toLocaleTimeString()+" : "+ str);
-};
 
 const getCurrentDay = () => {
     const american_date_ahah = new Date().getDay();
@@ -273,20 +265,17 @@ const change_day = (day) => {
 
 day_picker.addEventListener("change", () => {
     change_day(day_picker.value);
-    log("day changed " + days[day_picker.value]);
 });
 
 tracking_toggle.addEventListener("click", () => {
     tracking = tracking_toggle.checked;
     update_all();
-    log("tracking changed on " + tracking);
 });
 
 tolerance_toggle.addEventListener("click", () => {
     tolerance = tolerance_toggle.checked;
     current_day_timeline = generateTimelineArray(timetable, current_day_num);
     update_all();
-    log("tolerance changed " + tolerance);
 });
 
 date_time_mouse_picker_time.addEventListener("click", () => {
@@ -299,7 +288,6 @@ date_time_mouse_picker_time.addEventListener("click", () => {
     } else {
         output_info(getTimeFromTimeString(input));
         update_whole_timeline();
-        log("time changed picker " + input);
     }
 });
 
@@ -312,9 +300,8 @@ const init = () => {
     output_whole_day_mousepick(0);
     setImage(new Date().getHours());
     last_h = new Date().getHours();
-    session_id = Math.round(Math.random()*10000000000000000);
-
-    session_info = {
+    let session_id = Math.round(Math.random()*10000000000000000);
+    let session_info = {
         user_md5: fingerprint.md5(),
         session_id: session_id,
         device_info:{
@@ -322,16 +309,14 @@ const init = () => {
             name: FRUBIL.client.name,
             client_version: FRUBIL.client.version,
             os: FRUBIL.client.os,
-            device_class: FRUBIL.client.class
+            device_class: FRUBIL.client.class,
+            brand: FRUBIL.device.brand,
+            model: FRUBIL.device.marketname
         },
-        start_time: new Date().toLocaleString(),
-        logs: []
+        stamp: new Date().toLocaleString(),
     }
+
+    __debug(JSON.stringify(session_info));
 };
 
 init();
-
-window.onbeforeunload = function () {
-    session_info.end_time = new Date().toLocaleString();
-    __debug(JSON.stringify(session_info));
-   }
