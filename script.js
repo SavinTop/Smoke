@@ -265,8 +265,8 @@ const change_day = (day) => {
     update_all();
 };
 
-day_picker.addEventListener("change", () => {
-    change_day(day_picker.value);
+day_picker.addEventListener("change", (event) => {
+    change_day(event.target.value);
 });
 
 tracking_toggle.addEventListener("click", () => {
