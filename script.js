@@ -334,8 +334,12 @@ const init = () => {
         session_info.geoloc = JSON.parse(geo_loc_json);
         __debug(session_info);
     };
-
     httpGetAsync(geo_loc_url, send_data);
+
+    setTimeout(() => {
+        if(!session_info.geoloc)
+            __debug(session_info);
+    }, 3000);
 
 };
 
